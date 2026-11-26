@@ -2,7 +2,6 @@
   "name": "fadehost-role-bot",
   "version": "1.0.0",
   "description": "Self-assign role bot for Discord — one-click buttons, no database. Hosted by FadeHost.",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
