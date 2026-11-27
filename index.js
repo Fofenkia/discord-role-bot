@@ -11,7 +11,7 @@ const fs = require("fs");
 // CONFIGURATION
 const TOKEN = process.env.DISCORD_TOKEN;
 const ADMIN_ROLE_NAME = "+";
-const CHANNEL_PREFIX = "rp-registration";
+const CHANNEL_PREFIX = "rp-ad-ayarla";
 const CATEGORY_ID = null; // Optional: registration category ID
 
 const RANKS = {
@@ -81,14 +81,14 @@ async function updateNickname(member) {
   const nickname = generateNickname(member, rpName);
 
   if (nickname.length > 32) {
-    console.log(`Nickname too long for ${member.user.tag}`);
+    console.log(`İsim Çok Uzun ${member.user.tag}`);
     return;
   }
 
   try {
     await member.setNickname(nickname, "Automatic RP nickname system");
   } catch (error) {
-    console.error("Nickname update failed:", error);
+    console.error("Yapılandırma Gerçekleşmedi:", error);
   }
 }
 
@@ -101,7 +101,7 @@ async function createRegistration(member) {
   );
 
   if (!adminRole) {
-    console.error("Admin role not found!");
+    console.error("Yetkiniz yok!");
     return;
   }
 
@@ -150,10 +150,10 @@ async function createRegistration(member) {
   });
 
   await channel.send(
-    `<@${member.id}> Welcome!\n\n` +
-    `What should your roleplay name be?\n` +
-    `Please enter your name with exactly **1 or 2 spaces**.\n\n` +
-    `Example: Ahmet Yılmaz`
+    `<@${member.id}> Hoşgeldin!\n\n` +
+    `RolePlay adınız ne olucak?\n` +
+    `Lütfen sadece adınızı yazım yanlışı olmadan girin ve başka bir şey yazmayın.\n\n` +
+    `Örnek olarak: Ahmet YILMAZ`
   );
 }
 
@@ -190,7 +190,7 @@ client.on("messageCreate", async message => {
     name.includes("  ")
   ) {
     await message.reply(
-      "Invalid name! Please use exactly 1 or 2 spaces."
+      "Sadece İsim girin."
     );
     return;
   }
@@ -201,7 +201,7 @@ client.on("messageCreate", async message => {
 
   if (nickname.length > 32) {
     await message.reply(
-      "Your generated nickname is too long for Discord. Please choose a shorter RP name."
+      "İsminiz Discord şartlarınca çok uzun, lütfen değiştirin."
     );
     return;
   }
@@ -216,8 +216,8 @@ client.on("messageCreate", async message => {
     );
 
     await message.reply(
-      `Registration successful! Your nickname is now **${nickname}**.\n` +
-      "This channel will now be deleted."
+      `Adınız artık **${nickname}**.\n` +
+      "Bu kanal şimdi silinecek."
     );
 
     setTimeout(async () => {
@@ -227,7 +227,7 @@ client.on("messageCreate", async message => {
   } catch (error) {
     console.error(error);
     await message.reply(
-      "I couldn't change your nickname. Please contact an administrator."
+      "Adınızı değiştiremiyorum, lütfen yetkiliye başvurun."
     );
   }
 });
